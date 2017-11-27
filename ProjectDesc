@@ -1,0 +1,62 @@
+-------------------
+
+1. randomly choose tau_guess_oPs and tau_guess_pPs
+2. iterate over deex photon times
+3. for every deex photon look for future decay
+4. for found decay time calculate probability
+ - that it is oPs
+ - that it is pPs
+ using exponential functions P=exp(-t/tau_guess) [t = decay_t-deex_t]
+5. With P_oPs and P_pPs calculated, randomly choose, with one was it - oPs or pPs
+*5a. If P_oPs and P_pPs are both smaller than Pmin - abandon searching for pair
+6. Create pairs deex+oPs and deex+pPs
+7. Compare result with generated pairs
+8. Evaluate error - percentage of false pairs independently for generated oPs and pPs
+??? 9. Correct tau_guess = tau_guess +
+
+
+NN workflow
+
+P1: generator
+  Input: generation parameters
+  Output:
+    tree with generated pairs
+    tree with separate vectors of deex, pPs, oPs times
+
+P2: guesser
+  Input:
+    tree with separate vectors of deex, pPs, oPs times
+    evaluation parameters (null for first training round)
+  Output:
+    tree with guessed pairs
+
+P3: evaluator
+  Input:
+    tree with generated pairs
+    tree with guessed pairs
+  Output:
+    evaluation parameters
+
+
+    ---------------                       -------------
+    |             |     times vectors     |           |
+    |  generator  | --------------------> |  guesser  |
+    |             |               ------> |           |
+    ---------------               |       -------------
+          |                       |             |
+          |                       |             |
+          | generated pairs       |             |
+          |                       |             |
+          |                       |             |  guessed pairs
+          V                       |             |
+    -------------                 |             |
+    |           |    evaluation   |             |
+    | evaluator | -----------------             |
+    |           | <------------------------------
+    -------------
+
+-------------------------------------------------------------------
+Comparing pairs needs creating few structures:
+- SmallEvent: time + unique index + type
+- BigEvent: 2 x SmallEvent
+and establishing evaluation methods.

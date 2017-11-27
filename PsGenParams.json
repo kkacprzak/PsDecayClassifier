@@ -1,0 +1,14 @@
+{
+  "PositronSourceIntensity":10000.0,
+  "SimulationTime":1.0,
+  "pPsLifetime":100.0,
+  "oPsLifetime":100000.0,
+  "oPs2pPsRatio":5.0,
+  "ProbDeexPhoton":1.0,
+  "Prob_pPs":1.0,
+  "Prob_oPs":1.0,
+  "GenerateBackground":false,
+  "AssignRecoWeights":false,
+  "PartialOutputFileName":"Task.root",
+  "FullOutputFileName":"Solution.root"
+}
